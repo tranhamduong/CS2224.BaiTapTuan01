@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import urllib.request
 from tqdm import tqdm
-
+from underthesea import word_tokenize
 
 # url =  'https://vnexpress.net'
 urls= [
@@ -40,6 +40,12 @@ def crawl():
 if __name__ == '__main__':
     output = crawl()
     
-    with open('output.txt', 'w') as f: 
+    with open('vnexpress_271_titles.txt', 'w') as f, \
+        open('vnexpress_271_titles_segmented.txt', 'w') as f_seg: 
         for title in output:
             f.write(title + '\n')
+            title = word_tokenize(title, format="text")
+            f_seg.write(title + '\n')
+
+    
+    
